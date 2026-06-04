@@ -12,19 +12,22 @@
 
 ## Recommended Environment
 
-- OS: Windows 11
+- OS: Windows 11 or macOS
 - Python: 3.10 or 3.11
 - GPU: NVIDIA RTX 5070 Ti, optional for later deep learning experiments
 - Game window: 2048 x 1080
 - Windows display scale: 100% recommended
+- macOS permission: enable Screen Recording for Terminal or VS Code
 
 ## Setup
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
 pip install -r requirements.txt
 ```
+
+Activate the virtual environment with `.venv\Scripts\activate` on Windows or
+`source .venv/bin/activate` on macOS/Linux.
 
 ## Project Structure
 
@@ -77,4 +80,3 @@ python -m prom_recognition.main --image data/screenshots/sample.png
 4. 实时窗口截图。
 5. 点击时机预测。
 6. 鼠标点击执行与延迟校准。
-
