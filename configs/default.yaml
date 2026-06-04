@@ -1,0 +1,39 @@
+window:
+  title: ""
+  width: 2048
+  height: 1080
+  dpi_aware: true
+
+roi:
+  x: 200
+  y: 100
+  width: 1648
+  height: 880
+
+detector:
+  hsv_lower: [0, 80, 120]
+  hsv_upper: [179, 255, 255]
+  min_radius: 20
+  max_radius: 180
+  canny_threshold1: 80
+  canny_threshold2: 160
+  hough_dp: 1.2
+  hough_min_dist: 40
+  hough_param1: 120
+  hough_param2: 24
+
+tracker:
+  max_center_distance: 35
+  confirm_frames: 3
+  max_missing_frames: 5
+  min_shrink_speed: 5.0
+
+timing:
+  target_radius: 34
+  click_offset_ms: 50
+
+debug:
+  show_window: true
+  draw_roi: true
+  draw_tracks: true
+

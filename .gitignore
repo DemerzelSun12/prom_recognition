@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+logs/*
+!logs/.gitkeep
+data/screenshots/*
+!data/screenshots/.gitkeep
+data/videos/*
+!data/videos/.gitkeep
+data/annotations/*
+!data/annotations/.gitkeep
+
