@@ -15,7 +15,7 @@ def draw_detections(frame: np.ndarray, detections: list[CircleDetection]) -> np.
         cv2.circle(output, center, 3, (0, 0, 255), -1)
         cv2.putText(
             output,
-            f"r={radius}",
+            f"r={radius} c={detection.confidence:.2f}",
             (center[0] + 8, center[1] - 8),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.6,
