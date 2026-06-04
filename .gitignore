@@ -12,4 +12,7 @@ data/videos/*
 !data/videos/.gitkeep
 data/annotations/*
 !data/annotations/.gitkeep
+*.DS_Store
+.idea/
+.vscode/
 
