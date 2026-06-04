@@ -26,6 +26,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tracks-csv", default="data/annotations/hpma_tracks.csv")
     parser.add_argument("--debug-dir", default="data/annotations/hpma_debug")
     parser.add_argument("--samples-per-second", type=float, default=2.0)
+    parser.add_argument("--dense-start-seconds", type=float, default=0.0)
     parser.add_argument("--dense-until-seconds", type=float, default=10.0)
     parser.add_argument("--dense-step-frames", type=int, default=10)
     parser.add_argument("--max-debug-frames", type=int, default=80)
@@ -39,7 +40,14 @@ def copy_video(source: Path, destination: Path) -> Path:
     return destination
 
 
-def extract_frames(video_path: Path, frames_dir: Path, samples_per_second: float, dense_until: float, dense_step: int) -> int:
+def extract_frames(
+    video_path: Path,
+    frames_dir: Path,
+    samples_per_second: float,
+    dense_start: float,
+    dense_until: float,
+    dense_step: int,
+) -> int:
     frames_dir.mkdir(parents=True, exist_ok=True)
     capture = cv2.VideoCapture(str(video_path))
     if not capture.isOpened():
@@ -48,8 +56,11 @@ def extract_frames(video_path: Path, frames_dir: Path, samples_per_second: float
     fps = capture.get(cv2.CAP_PROP_FPS) or 60.0
     total = int(capture.get(cv2.CAP_PROP_FRAME_COUNT))
     sample_step = max(1, int(round(fps / samples_per_second)))
-    dense_limit = min(total, int(round(fps * dense_until)))
-    frame_indices = set(range(0, total, sample_step)) | set(range(0, dense_limit, dense_step))
+    dense_start_frame = max(0, min(total, int(round(fps * dense_start))))
+    dense_until_frame = max(dense_start_frame, min(total, int(round(fps * dense_until))))
+    frame_indices = set(range(0, total, sample_step)) | set(
+        range(dense_start_frame, dense_until_frame, dense_step)
+    )
 
     saved = 0
     for frame_index in sorted(frame_indices):
@@ -180,6 +191,7 @@ def main() -> None:
         project_video,
         Path(args.frames_dir),
         args.samples_per_second,
+        args.dense_start_seconds,
         args.dense_until_seconds,
         args.dense_step_frames,
     )

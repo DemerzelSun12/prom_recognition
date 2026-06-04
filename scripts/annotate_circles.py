@@ -22,6 +22,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output", default="data/annotations/hpma_manual_circles.csv")
     parser.add_argument("--start", default="")
     parser.add_argument("--scale", type=float, default=0.5)
+    parser.add_argument("--color", default="unknown")
+    parser.add_argument("--state", default="shrinking")
     return parser.parse_args()
 
 
@@ -137,7 +139,7 @@ def main() -> None:
             center = None
             return
         saved_for_image.setdefault(image_name, []).append((center[0], center[1], radius))
-        csv_rows.append([image_name, center[0], center[1], radius, "unknown", "shrinking", ""])
+        csv_rows.append([image_name, center[0], center[1], radius, args.color, args.state, ""])
         write_csv_rows(output_csv, csv_rows)
         print(f"saved {image_name}: x={center[0]} y={center[1]} r={radius}")
         center = None

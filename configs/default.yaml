@@ -44,7 +44,7 @@ tracker:
   min_shrink_speed: 5.0
 
 timing:
-  target_radius: 68
+  target_radius: 89
   click_offset_ms: 50
 
 debug:
