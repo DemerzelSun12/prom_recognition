@@ -15,7 +15,7 @@ data/videos/*
 !data/videos/.gitkeep
 data/annotations/*
 !data/annotations/.gitkeep
+!data/annotations/*.csv
 *.DS_Store
 .idea/
 .vscode/
-
